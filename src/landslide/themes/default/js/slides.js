@@ -28,6 +28,7 @@ function Landslide() {
         helpOpened           = false,
         hiddenContext        = false,
         isPresenterView      = false,
+        landslide            = this,
         overviewActive       = false,
         modifierKeyDown      = false,
         notesOn              = false,
@@ -169,7 +170,9 @@ function Landslide() {
 
         if (event.wheelDelta) {
             delta = event.wheelDelta/120;
-            if (window.opera) delta = -delta;
+            if (window.opera) {
+                delta = -delta;
+            }
         } else if (event.detail) {
             delta = -event.detail/3;
         }
@@ -213,7 +216,7 @@ function Landslide() {
 
     var showHelp = function() {
         if (tocOpened) {
-                showToc();
+            showToc();
         }
 
         var help = document.getElementById('help');
@@ -250,7 +253,7 @@ function Landslide() {
 
     var showToc = function() {
         if (helpOpened) {
-                showHelp();
+            showHelp();
         }
         var toc = document.getElementById('toc');
         if (toc) {
@@ -301,8 +304,9 @@ function Landslide() {
     };
 
     var updateOtherPage = function() {
-        if (!showingPresenterView) { return; }
-
+        if (!showingPresenterView) {
+            return;
+        }
         var w = isPresenterView ? window.opener : presenterViewWin;
         w.postMessage('slide#' + currentSlideNo, '*');
     };
@@ -351,20 +355,6 @@ function Landslide() {
         presentation.style.transform = transform;
     };
 
-    var expandSlides = function() {
-        if (overviewActive) {
-            return;
-        }
-        if (expanded) {
-            setScale(1);
-            expanded = false;
-        } else {
-            scale = computeScale();
-            setScale(scale);
-            expanded = true;
-        }
-    };
-
     var showContext = function() {
         try {
             var presentation = document.getElementsByClassName('slides')[0];
@@ -385,11 +375,6 @@ function Landslide() {
         } else {
             showContext();
         }
-    };
-
-    var toggleContext = function() {
-        hiddenContext = !hiddenContext;
-        processContext();
     };
 
     var isModifierKey = function(keyCode) {
@@ -437,12 +422,12 @@ function Landslide() {
                 break;
             case 67: // c
                 if (!modifierKeyDown && !overviewActive) {
-                    toggleContext();
+                    landslide.toggleContext();
                 }
                 break;
             case 69: // e
                 if (!modifierKeyDown && !overviewActive) {
-                    expandSlides();
+                    landslide.expandSlides();
                 }
                 break;
             case 72: // h
@@ -531,7 +516,9 @@ function Landslide() {
 
         processContext();
 
-        document.getElementsByTagName('title')[0].innerText = getSlideTitle(currentSlideNo);
+        try {
+            document.getElementsByTagName('title')[0].innerText = getSlideTitle(currentSlideNo);
+        } catch (e) {}
 
         updatePresenterNotes();
 
@@ -540,6 +527,22 @@ function Landslide() {
 
     var trim = function(str) {
         return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+    };
+
+    /** Public methods **/
+
+    this.expandSlides = function() {
+        if (overviewActive) {
+            return;
+        }
+        if (expanded) {
+            setScale(1);
+            expanded = false;
+        } else {
+            scale = computeScale();
+            setScale(scale);
+            expanded = true;
+        }
     };
 
     this.initialize = function() {
@@ -568,7 +571,7 @@ function Landslide() {
         document.addEventListener('DOMMouseScroll', handleWheel, false);
 
         window.onmousewheel = document.onmousewheel = handleWheel;
-        window.onresize = expandSlides;
+        window.onresize = this.expandSlides;
 
         for (var i = 0, el; el = slides[i]; i++) {
             addClass(el, 'slide far-future');
@@ -583,5 +586,10 @@ function Landslide() {
         addSlideClickListeners();
 
         addRemoteWindowControls();
+    };
+
+    this.toggleContext = function() {
+        hiddenContext = !hiddenContext;
+        processContext();
     };
 }
