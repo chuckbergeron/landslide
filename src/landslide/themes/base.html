@@ -184,7 +184,9 @@
         </table>
     </div>
     {% endblock help %}
-    <script>main()</script>
+    <script>
+    {% block bottom_script %}main(){% endblock bottom_script %}
+    </script>
 {% endblock body_content %}
 </body>
 </html>

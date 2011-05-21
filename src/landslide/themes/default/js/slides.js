@@ -365,19 +365,19 @@ function main() {
         return false;
         break;
     }
-  }
+  };
 
   var checkModifierKeyUp = function(event) {
     if (isModifierKey(event.keyCode)) {
       modifierKeyDown = false;
     }
-  }
+  };
 
   var checkModifierKeyDown = function(event) {
     if (isModifierKey(event.keyCode)) {
       modifierKeyDown = true;
     }
-  }
+  };
 
   var handleBodyKeyDown = function(event) {
     if (modifierKeyDown) {
@@ -485,7 +485,7 @@ function main() {
           updateSlideClasses(false);
       }
     }, false);
-  }
+  };
 
   var addTouchListeners = function() {
     document.addEventListener('touchstart', function(e) {
