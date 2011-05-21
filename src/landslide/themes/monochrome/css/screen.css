@@ -10,4 +10,7 @@ body {
 
 div.slide {
     background: #fff;
+    border-radius: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
 }

@@ -516,7 +516,7 @@ function main() {
                 tocLinks.item(i).addEventListener('click', function(e) {
                     currentSlideNo = Number(this.attributes['href'].value.replace('#slide', ''));
                     updateSlideClasses(true);
-                    e.preventDefault();
+
                 }, true);
             }
         }
