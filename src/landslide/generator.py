@@ -130,6 +130,7 @@ class Generator(object):
                            "destination")
 
         self.theme_dir = self.find_theme_dir(self.theme, self.copy_theme)
+        self.theme_name = os.path.basename(self.theme_dir)
         self.template_file = self.get_template_file()
 
     def add_user_css(self, css_list):
@@ -291,7 +292,7 @@ class Generator(object):
         }
 
         screen_css = os.path.join(self.theme_dir, 'css', 'screen.css')
-        if (os.path.exists(screen_css)):
+        if os.path.exists(screen_css):
             css['screen'] = {
                 'path_url': utils.get_path_url(screen_css, self.relative),
                 'contents': open(screen_css).read(),
@@ -449,14 +450,18 @@ class Generator(object):
             if inspect.isclass(m) and issubclass(m, macro_module.Macro):
                 self.macros.append(m)
             else:
-                raise TypeError("Coundn't register macro; a macro must inherit"
-                                " from macro.Macro")
+                raise TypeError("Couldn't register macro; a macro class must "
+                                "inherit from macro.Macro")
 
     def render(self):
         """ Returns generated html code.
         """
-        template_src = codecs.open(self.template_file, encoding=self.encoding)
-        template = jinja2.Template(template_src.read())
+        env = jinja2.Environment(loader=jinja2.FileSystemLoader(THEMES_DIR))
+        try:
+            template = env.get_template(os.path.join(self.theme_name,
+                                                     'base.html'))
+        except jinja2.exceptions.TemplateNotFound:
+            template = env.get_template(os.path.join('default', 'base.html'))
         slides = self.fetch_contents(self.source)
         context = self.get_template_vars(slides)
         return template.render(context)
