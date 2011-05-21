@@ -1,40 +1,43 @@
-function main() {
-    // Since we don't have the fallback of attachEvent and
-    // other IE only stuff we won't try to run JS for IE.
-    // It will run though when using Google Chrome Frame
-    if (document.all) { return; }
-
-    var currentSlideNo;
-    var notesOn = false;
-    var expanded = false;
-    var hiddenContext = false;
-    var slides = document.getElementsByClassName('slide');
-    var touchStartX = 0;
-    var spaces = /\s+/, a1 = [''];
-    var tocOpened = false;
-    var helpOpened = false;
-    var overviewActive = false;
-    var modifierKeyDown = false;
-    var scale = 1;
-    var showingPresenterView = false;
-    var presenterViewWin = null;
-    var isPresenterView = false;
-
-    var str2array = function(s) {
-        if (typeof s == 'string' || s instanceof String) {
-            if (s.indexOf(' ') < 0) {
-                a1[0] = s;
-                return a1;
-            } else {
-                return s.split(spaces);
-            }
-        }
-        return s;
-    };
-
-    var trim = function(str) {
-        return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-    };
+/**
+ * Landslide
+ *
+ * Copyright 2010 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Original slides:         Marcin Wichary (mwichary@google.com)
+ * Modifications:           Ernest Delgado (ernestd@google.com)
+ *                          Alex Russell (slightlyoff@chromium.org)
+ *
+ * landslide modifications: Adam Zapletal (adamzap@gmail.com)
+ *                          Nicolas Perriault (nperriault@gmail.com)
+ */
+function Landslide() {
+    var currentSlideNo       = 0,
+        expanded             = false,
+        helpOpened           = false,
+        hiddenContext        = false,
+        isPresenterView      = false,
+        overviewActive       = false,
+        modifierKeyDown      = false,
+        notesOn              = false,
+        presenterViewWin     = null,
+        scale                = 1,
+        showingPresenterView = false,
+        slides               = document.getElementsByClassName('slide'),
+        tocOpened            = false,
+        touchStartX          = 0
+    ;
 
     var addClass = function(node, classStr) {
         classStr = str2array(classStr);
@@ -48,23 +51,78 @@ function main() {
         node.className = trim(cls);
     };
 
-    var removeClass = function(node, classStr) {
-        var cls;
-        if (!node) {
-            throw 'no node provided';
-        }
-        if (classStr !== undefined) {
-            classStr = str2array(classStr);
-            cls = ' ' + node.className + ' ';
-            for (var i = 0, len = classStr.length; i < len; ++i) {
-                cls = cls.replace(' ' + classStr[i] + ' ', ' ');
+    var addRemoteWindowControls = function() {
+        window.addEventListener("message", function(e) {
+            if (e.data.indexOf("slide#") != -1) {
+                    currentSlideNo = Number(e.data.replace('slide#', ''));
+                    updateSlideClasses(false);
             }
-            cls = trim(cls);
-        } else {
-            cls = '';
+        }, false);
+    };
+
+    var addSlideClickListeners = function() {
+        for (var i=0; i < slides.length; i++) {
+            var slide = slides.item(i);
+            slide.num = i + 1;
+            slide.addEventListener('click', function(e) {
+                if (overviewActive) {
+                    currentSlideNo = this.num;
+                    toggleOverview();
+                    updateSlideClasses(true);
+                    e.preventDefault();
+                }
+                return false;
+            }, true);
         }
-        if (node.className != cls) {
-            node.className = cls;
+    };
+
+    var addTocLinksListeners = function() {
+        var toc = document.getElementById('toc');
+        if (toc) {
+            var tocLinks = toc.getElementsByTagName('a');
+            for (var i=0; i < tocLinks.length; i++) {
+                tocLinks.item(i).addEventListener('click', function(e) {
+                    currentSlideNo = Number(this.attributes['href'].value.replace('#slide', ''));
+                    updateSlideClasses(true);
+
+                }, true);
+            }
+        }
+    };
+
+    var addTouchListeners = function() {
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].pageX;
+        }, false);
+        document.addEventListener('touchend', function(e) {
+            var pixelsMoved = touchStartX - e.changedTouches[0].pageX;
+            var SWIPE_SIZE = 150;
+            if (pixelsMoved > SWIPE_SIZE) {
+                nextSlide();
+            }
+            else if (pixelsMoved < -SWIPE_SIZE) {
+                prevSlide();
+            }
+        }, false);
+    };
+
+    var changeSlideElClass = function(slideNo, className) {
+        var el = getSlideEl(slideNo);
+        if (el) {
+            removeClass(el, 'far-past past current future far-future');
+            addClass(el, className);
+        }
+    };
+
+    var checkModifierKeyUp = function(event) {
+        if (isModifierKey(event.keyCode)) {
+            modifierKeyDown = false;
+        }
+    };
+
+    var checkModifierKeyDown = function(event) {
+        if (isModifierKey(event.keyCode)) {
+            modifierKeyDown = true;
         }
     };
 
@@ -74,17 +132,6 @@ function main() {
         } else {
             return null;
         }
-    };
-
-    var getSlideTitle = function(slideNo) {
-        var el = getSlideEl(slideNo);
-        if (el) {
-            var headers = el.getElementsByTagName('header');
-            if (headers.length > 0) {
-                return el.getElementsByTagName('header')[0].innerText;
-            }
-        }
-        return null;
     };
 
     var getSlidePresenterNote = function(slideNo) {
@@ -98,48 +145,40 @@ function main() {
         return null;
     };
 
-    var changeSlideElClass = function(slideNo, className) {
+    var getSlideTitle = function(slideNo) {
         var el = getSlideEl(slideNo);
         if (el) {
-            removeClass(el, 'far-past past current future far-future');
-            addClass(el, className);
+            var headers = el.getElementsByTagName('header');
+            if (headers.length > 0) {
+                return el.getElementsByTagName('header')[0].innerText;
+            }
         }
+        return null;
     };
 
-    var updateSlideClasses = function(updateOther) {
-        window.location.hash = (isPresenterView ? "presenter" : "slide") + currentSlideNo;
-
-        for (var i=1; i<currentSlideNo-1; i++) {
-            changeSlideElClass(i, 'far-past');
+    var handleWheel = function(event) {
+        if (tocOpened || helpOpened || overviewActive) {
+            return;
         }
 
-        changeSlideElClass(currentSlideNo - 1, 'past');
-        changeSlideElClass(currentSlideNo, 'current');
-        changeSlideElClass(currentSlideNo + 1, 'future');
+        var delta = 0;
 
-        for (i=currentSlideNo+2; i<slides.length+1; i++) {
-            changeSlideElClass(i, 'far-future');
+        if (!event) {
+            event = window.event;
         }
 
-        highlightCurrentTocLink();
+        if (event.wheelDelta) {
+            delta = event.wheelDelta/120;
+            if (window.opera) delta = -delta;
+        } else if (event.detail) {
+            delta = -event.detail/3;
+        }
 
-        processContext();
-
-        document.getElementsByTagName('title')[0].innerText = getSlideTitle(currentSlideNo);
-
-        updatePresenterNotes();
-
-        if (updateOther) { updateOtherPage(); }
-    };
-
-    var updatePresenterNotes = function() {
-        if (!isPresenterView) { return; }
-
-        var existingNote = document.getElementById('current_presenter_notes');
-        var currentNote = getSlidePresenterNote(currentSlideNo).cloneNode(true);
-        currentNote.setAttribute('id', 'presenter_note');
-
-        existingNote.replaceChild(currentNote, document.getElementById('presenter_note'));
+        if (delta && delta <0) {
+            nextSlide();
+        } else if (delta) {
+            prevSlide();
+        }
     };
 
     var highlightCurrentTocLink = function() {
@@ -158,13 +197,6 @@ function main() {
         }
     };
 
-    var updateOtherPage = function() {
-        if (!showingPresenterView) { return; }
-
-        var w = isPresenterView ? window.opener : presenterViewWin;
-        w.postMessage('slide#' + currentSlideNo, '*');
-    };
-
     var nextSlide = function() {
         if (currentSlideNo < slides.length) {
             currentSlideNo++;
@@ -179,10 +211,23 @@ function main() {
         updateSlideClasses(true);
     };
 
+    var showHelp = function() {
+        if (tocOpened) {
+                showToc();
+        }
+
+        var help = document.getElementById('help');
+
+        if (help) {
+            help.style.marginLeft = helpOpened ? '-' + (help.clientWidth + 20) + 'px' : '0px';
+            helpOpened = !helpOpened;
+        }
+    };
+
     var showNotes = function() {
         var notes = getSlideEl(currentSlideNo).getElementsByClassName('notes');
         for (var i = 0, len = notes.length; i < len; i++) {
-            notes.item(i).style.display = (notesOn) ? 'none':'block';
+            notes.item(i).style.display = notesOn ? 'none':'block';
         }
         notesOn = !notesOn;
     };
@@ -213,19 +258,6 @@ function main() {
             tocOpened = !tocOpened;
         }
         updateOverview();
-    };
-
-    var showHelp = function() {
-        if (tocOpened) {
-                showToc();
-        }
-
-        var help = document.getElementById('help');
-
-        if (help) {
-            help.style.marginLeft = helpOpened ? '-' + (help.clientWidth + 20) + 'px' : '0px';
-            helpOpened = !helpOpened;
-        }
     };
 
     var showPresenterView = function() {
@@ -266,6 +298,13 @@ function main() {
         }
         processContext();
         updateOverview();
+    };
+
+    var updateOtherPage = function() {
+        if (!showingPresenterView) { return; }
+
+        var w = isPresenterView ? window.opener : presenterViewWin;
+        w.postMessage('slide#' + currentSlideNo, '*');
     };
 
     var updateOverview = function() {
@@ -367,18 +406,6 @@ function main() {
         }
     };
 
-    var checkModifierKeyUp = function(event) {
-        if (isModifierKey(event.keyCode)) {
-            modifierKeyDown = false;
-        }
-    };
-
-    var checkModifierKeyDown = function(event) {
-        if (isModifierKey(event.keyCode)) {
-            modifierKeyDown = true;
-        }
-    };
-
     var handleBodyKeyDown = function(event) {
         switch (event.keyCode) {
             case 13: // Enter
@@ -442,89 +469,87 @@ function main() {
         }
     };
 
-    var handleWheel = function(event) {
-        if (tocOpened || helpOpened || overviewActive) {
+    var removeClass = function(node, classStr) {
+        var cls;
+        if (!node) {
+            throw 'no node provided';
+        }
+        if (classStr !== undefined) {
+            classStr = str2array(classStr);
+            cls = ' ' + node.className + ' ';
+            for (var i = 0, len = classStr.length; i < len; ++i) {
+                cls = cls.replace(' ' + classStr[i] + ' ', ' ');
+            }
+            cls = trim(cls);
+        } else {
+            cls = '';
+        }
+        if (node.className != cls) {
+            node.className = cls;
+        }
+    };
+
+    var str2array = function(s) {
+        var a1 = [''];
+        if (typeof s == 'string' || s instanceof String) {
+            if (s.indexOf(' ') < 0) {
+                a1[0] = s;
+                return a1;
+            } else {
+                return s.split(/\s+/);
+            }
+        }
+        return s;
+    };
+
+    var updatePresenterNotes = function() {
+        if (!isPresenterView) { return; }
+
+        var existingNote = document.getElementById('current_presenter_notes');
+        var currentNote = getSlidePresenterNote(currentSlideNo).cloneNode(true);
+        currentNote.setAttribute('id', 'presenter_note');
+
+        existingNote.replaceChild(currentNote, document.getElementById('presenter_note'));
+    };
+
+    var updateSlideClasses = function(updateOther) {
+        window.location.hash = (isPresenterView ? "presenter" : "slide") + currentSlideNo;
+
+        for (var i=1; i<currentSlideNo-1; i++) {
+            changeSlideElClass(i, 'far-past');
+        }
+
+        changeSlideElClass(currentSlideNo - 1, 'past');
+        changeSlideElClass(currentSlideNo, 'current');
+        changeSlideElClass(currentSlideNo + 1, 'future');
+
+        for (i=currentSlideNo+2; i<slides.length+1; i++) {
+            changeSlideElClass(i, 'far-future');
+        }
+
+        highlightCurrentTocLink();
+
+        processContext();
+
+        document.getElementsByTagName('title')[0].innerText = getSlideTitle(currentSlideNo);
+
+        updatePresenterNotes();
+
+        if (updateOther) { updateOtherPage(); }
+    };
+
+    var trim = function(str) {
+        return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+    };
+
+    this.initialize = function() {
+        // Since we don't have the fallback of attachEvent and
+        // other IE only stuff we won't try to run JS for IE.
+        // It will run though when using Google Chrome Frame
+        if (document.all) {
             return;
         }
 
-        var delta = 0;
-
-        if (!event) {
-            event = window.event;
-        }
-
-        if (event.wheelDelta) {
-            delta = event.wheelDelta/120;
-            if (window.opera) delta = -delta;
-        } else if (event.detail) {
-            delta = -event.detail/3;
-        }
-
-        if (delta && delta <0) {
-            nextSlide();
-        } else if (delta) {
-            prevSlide();
-        }
-    };
-
-    var addSlideClickListeners = function() {
-        for (var i=0; i < slides.length; i++) {
-            var slide = slides.item(i);
-            slide.num = i + 1;
-            slide.addEventListener('click', function(e) {
-                if (overviewActive) {
-                    currentSlideNo = this.num;
-                    toggleOverview();
-                    updateSlideClasses(true);
-                    e.preventDefault();
-                }
-                return false;
-            }, true);
-        }
-    };
-
-    var addRemoteWindowControls = function() {
-        window.addEventListener("message", function(e) {
-            if (e.data.indexOf("slide#") != -1) {
-                    currentSlideNo = Number(e.data.replace('slide#', ''));
-                    updateSlideClasses(false);
-            }
-        }, false);
-    };
-
-    var addTouchListeners = function() {
-        document.addEventListener('touchstart', function(e) {
-            touchStartX = e.touches[0].pageX;
-        }, false);
-        document.addEventListener('touchend', function(e) {
-            var pixelsMoved = touchStartX - e.changedTouches[0].pageX;
-            var SWIPE_SIZE = 150;
-            if (pixelsMoved > SWIPE_SIZE) {
-                nextSlide();
-            }
-            else if (pixelsMoved < -SWIPE_SIZE) {
-             prevSlide();
-            }
-        }, false);
-    };
-
-    var addTocLinksListeners = function() {
-        var toc = document.getElementById('toc');
-        if (toc) {
-            var tocLinks = toc.getElementsByTagName('a');
-            for (var i=0; i < tocLinks.length; i++) {
-                tocLinks.item(i).addEventListener('click', function(e) {
-                    currentSlideNo = Number(this.attributes['href'].value.replace('#slide', ''));
-                    updateSlideClasses(true);
-
-                }, true);
-            }
-        }
-    };
-
-    // initialize
-
-    (function() {
         if (window.location.hash == "") {
             currentSlideNo = 1;
         } else if (window.location.hash.indexOf("#presenter") != -1) {
@@ -558,5 +583,5 @@ function main() {
         addSlideClickListeners();
 
         addRemoteWindowControls();
-    })();
+    };
 }

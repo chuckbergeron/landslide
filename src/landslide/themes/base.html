@@ -184,9 +184,12 @@
         </table>
     </div>
     {% endblock help %}
+    {% block bottom_script %}
     <script>
-    {% block bottom_script %}main(){% endblock bottom_script %}
+        var landslide = new Landslide();
+        landslide.initialize();
     </script>
+    {% endblock bottom_script %}
 {% endblock body_content %}
 </body>
 </html>
