@@ -13,4 +13,7 @@ div.slide {
     border-radius: 0;
     -moz-border-radius: 0;
     -webkit-border-radius: 0;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
 }
