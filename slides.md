@@ -3,6 +3,17 @@ Contributing to Ruby on Rails
 
 ---
 
+By this guy:
+---------
+
+<img src="images/chuck.jpg" alt="Chuck" style="width: 200px;"/>
+
+# Charles Bergeron
+
+[@CharlesEllery](http://twitter.com/CharlesEllery)
+
+---
+
 Credits
 ---------
 
@@ -10,33 +21,22 @@ Credits
 
 ---
 
-Slide #2
+Rails Mailing List:
 ========
 
-.fx: foo bar
+## Discussing possible features and changes:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean magna tellus,
-fermentum nec venenatis nec, dapibus id metus. Phasellus nulla massa, consequat
-nec tempor et, elementum viverra est. Duis sed nisl in eros adipiscing tempor.
+[Rails on Google Groups](https://groups.google.com/forum/?fromgroups#!forum/rubyonrails-core)
 
-Section #1
-----------
+<br>
 
-Integer in dignissim ipsum. Integer pretium nulla at elit facilisis eu feugiat
-velit consectetur.
+## Bugs & Patches:
 
-Section #2
-----------
+- Search for existing issues
+- Create a new issue
+- Fix an existing issue
 
-Donec risus tortor, dictum sollicitudin ornare eu, egestas at purus. Cras
-consequat lacus vitae lectus faucibus et molestie nisl gravida. Donec tempor,
-tortor in varius vestibulum, mi odio laoreet magna, in hendrerit nibh neque eu
-eros.
-
-Unicode Characters Work
------------------------
-
-© é
+[Rails Issues on Github](https://github.com/rails/rails/issues)
 
 ---
 
@@ -48,19 +48,11 @@ Middle Title Slide
 Slide #3
 ========
 
-**Hello Gentlemen**
+Lorem Gangster you son of a bizzle. Check out this. Boom shackalack gravida. Vestibulizzle nizzle mi, volutpat izzle, fo shizzle mah nizzle fo rizzle, mah home g-dizzle sizzle, adipiscing sempizzle, velit.
 
-- Mega Man 2
-- Mega Man 3
-- Spelunky
-- Dungeon Crawl Stone Soup
-- Etrian Odyssey
+Suspendisse venenatizzle placerizzle lacizzle. Curabitur check out this ante. Crunk izzle litora pizzle shut the shizzle up conubia mah nizzle, ghetto inceptos hymenizzle.
 
-*Are you prepared to see beyond the veil of reason?* - DeceasedCrab
-
-- Black Cascade
-- Two Hunters
-- Diadem of 12 Stars
+Aliquizzle interdizzle, phat ma nizzle elementum nonummy, nisl orci check it out leo, things semper risizzle uhuh ... yih! I saw beyonces tizzles and my pizzle went crizzle sizzle.
 
 ---
 
