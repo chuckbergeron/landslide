@@ -44,15 +44,6 @@ Resources
 
 ---
 
-Slide #3
-========
-
-Lorem Gangster you son of a bizzle. Boom shackalack gravida. Vestibulizzle nizzle mi, volutpat izzle, fo shizzle mah nizzle fo rizzle, mah home g-dizzle sizzle, adipiscing sempizzle, velit.
-
-Aliquizzle interdizzle, phat ma nizzle elementum nonummy, nisl orci check it out leo, things semper risizzle uhuh ... yih! I saw beyonces tizzles and my pizzle went crizzle sizzle.
-
----
-
 Where To Start?
 ==================
 
@@ -127,6 +118,8 @@ Create a fake application to test Rails against:
     $ railties/bin/rails new ../test_app --dev
 
     gem 'rails', path: '/Users/charlesbergeron/Git/rails-dev-box/rails'
+
+<em>Cue to open Issue & Rails code</em>
 
 ---
 
