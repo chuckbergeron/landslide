@@ -152,7 +152,7 @@ a {
 }
 
 pre {
-  font-size: 26px;
+  font-size: 22px;
   font-family: Monaco, Courier, monospace;
 }
 
@@ -515,4 +515,11 @@ a {
 }
 a:hover {
   color: #bc1a1c;
+}
+
+div.slide p.footnote {
+  font-size: 17px;
+  position: absolute;
+  bottom: 40px;
+  width: 80%;
 }
