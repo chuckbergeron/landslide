@@ -70,6 +70,10 @@ If you want to stay on the edge:
 - Run `landslide slides.md` or `landslide slides.rst`
 - Enjoy your newly generated `presentation.html`
 
+    Repace 'file://...screen.css' with this:
+    <link rel="stylesheet" media="screen, projection" href="src/landslide/themes/light/css/screen.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
 Or get it as a PDF document if PrinceXML is installed and available on your system:
 
     $ landslide README.md -d readme.pdf

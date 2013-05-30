@@ -1,33 +1,12 @@
-Landslide
+Contributing to Ruby on Rails
 =========
 
 ---
 
-Landslide
+Credits
 ---------
 
-.notes: plop
-
-Generates a slideshow using the slides that power
-[the html5-slides presentation](http://apirocks.com/html5/html5.html).
-
-A `python` with the `jinja2`, `markdown`, and `pygments` modules is required.
-
-Markdown Formatting Instructions
---------------------------------
-
-- Separate your slides with a horizontal rule (--- in markdown)
-- Your first slide (title slide) should not have a heading, only `<p>`s
-- Your other slides should have a heading that renders to an h1 element
-- To highlight blocks of code, put !{{lang}} as the first indented line
-- See the included slides.md for an example
-
-Rendering Instructions
-----------------------
-
-- Put your markdown content in a file called `slides.md`
-- Run `python render.py`
-- Enjoy your newly generated `presentation.html`
+# Based on ['Your First Rails Pull Request' by Mark McSpadden](http://goo.gl/plMEP)
 
 ---
 
@@ -119,7 +98,7 @@ Another code block:
 
     !java
     if (markdown && isEasy()) {
-        return true; 
+        return true;
     }
 
 ---
