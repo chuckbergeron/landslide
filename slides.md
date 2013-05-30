@@ -19,9 +19,9 @@ With Credit to Mark McSpadden
 
 <img src="http://qph.is.quoracdn.net/main-thumb-2619439-200-i9Tm2fEcoS0JAe8HPwC9b0Lspu701viA.jpeg" alt="Mark" style="width: 200px;"/>
 
-# Based on ['Your First Rails Pull Request'](http://goo.gl/plMEP)
+# Based on Mark McSpadden's talk: ['Your First Rails Pull Request'](http://goo.gl/plMEP)
 
-[@CharlesEllery](http://twitter.com/markmcspadden)
+[@MarkMcspadden](http://twitter.com/markmcspadden)
 
 ---
 
@@ -53,6 +53,11 @@ Aliquizzle interdizzle, phat ma nizzle elementum nonummy, nisl orci check it out
 
 ---
 
+Where To Start?
+==================
+
+---
+
 <img src="http://tcritic.com/wp-content/uploads/2006/09/rtfm.jpg" style="margin: auto">
 ==================
 
@@ -73,9 +78,15 @@ Read the [Rails Edge* Guide](http://edgeguides.rubyonrails.org/contributing_to_r
 Start With The VM
 ========
 
+You'll want the [Rails Virtual Machine on Github](https://github.com/rails/rails-dev-box)
+
     !bash
     $ cd ~/Git
     $ git clone https://github.com/rails/rails-dev-box.git rails-dev-box
+    $ cd rails-dev-box
+    $ vagrant up
+
+    # Installing... Have a beer with your peer.
 
 ---
 
@@ -108,14 +119,63 @@ Create a fake application to test Rails against:
     !bash
     # If you RVM...
     $ rvm use ruby-2.0.0-p0@rails
-    $ cd ~/Git/rails-repo/rails
+
+    $ cd ~/Git/rails-dev-box/rails
     $ bundle install
 
     # Use the Rails 4 binary to create your new app (needs --dev flag)
     $ railties/bin/rails new ../test_app --dev
 
-    !ruby
-    gem 'rails', path: '/Users/charlesbergeron/Git/rails-repo/test_app'
+    gem 'rails', path: '/Users/charlesbergeron/Git/rails-dev-box/rails'
+
+---
+
+Testing
+========
+
+Develop locally (on the host, using your vim, sublime, what-have-you)
+
+Test in the VM:
+
+    !bash
+    host $ cd ~/Git/rails-dev-box
+    host $ vagrant ssh
+
+    remote $ cd /vagrant/rails
+    remote $ bundle exec rake
+    # Stop! Don't test the whole thing!
+
+    remote $ cd /activemodel
+    remote $ bundle exec rake
+
+    # Cleanup after yourself...
+    remote $ exit
+    host $ vagrant halt
+
+---
+
+And Then What?
+================
+
+---
+
+Gamification!
+========
+
+What does Mary Poppins have to do with this?
+
+<img src="http://zefcan.com/wp-content/uploads/2013/01/mary-gamifying-poppins1.jpeg" width="400">
+
+---
+
+Rails Is Just One Big Game
+========
+
+Check out the [Contributor Leaderboard](http://contributors.rubyonrails.org/) *
+
+<p class="footnote">
+  * In particular, <a href="http://contributors.rubyonrails.org/contributors/matthew-robertson/commits">Matthew Robertson</a> and <a href="http://contributors.rubyonrails.org/contributors/godfrey-chan/commits">Godfrey Chan</a> – Go forth and beat their scores!
+</p>
 
 ---
 
@@ -127,32 +187,14 @@ I was so inspired that...
 <br><br><br><br>
 
 <p class="footnote">
-  * A fix to use `Range#include?` for non-numeric ranges while sticking to `Range#cover?` for numerical ranges in the `validates_inclusion_of` validator. But it's just the beginning...
+  * To use `Range#include?` for non-numeric ranges while sticking to `Range#cover?` for numerical ranges when validating with `validates_inclusion_of`. But that's just the beginning...
 </p>
 
 ---
 
-CODE!
+More Gamification?
 ========
 
-First code block:
+<img src="http://www.jmorganmarketing.com/wp-content/uploads/2012/03/Gamification11.jpg" width="600">
 
-    !bash
-    while True:
-        print "Everything's gonna be allright"
-
-Second code block:
-
-    !php
-    <?php exec('python render.py --help'); ?>
-
-Third code block:
-
-    !xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <painting>
-      <img src="madonna.jpg" alt='Foligno Madonna, by Raphael'/>
-      <caption>This is Raphael's "Foligno" Madonna, painted in
-        <date>1511</date>–<date>1512</date>.
-      </caption>
-    </painting>
+wat?
