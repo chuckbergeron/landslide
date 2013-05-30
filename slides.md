@@ -156,13 +156,11 @@ And Then What?
 Gamification!
 ========
 
-What does Mary Poppins have to do with this?
-
-<img src="http://zefcan.com/wp-content/uploads/2013/01/mary-gamifying-poppins1.jpeg" width="400">
+<img src="http://www.geekosystem.com/wp-content/uploads/2011/07/gamification-e1311174368310.jpg" width="700">
 
 ---
 
-Rails Is Just One Big Game
+Think Of Rails As Simply One Big Game
 ========
 
 Check out the [Contributor Leaderboard](http://contributors.rubyonrails.org/) *
