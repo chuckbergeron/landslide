@@ -143,12 +143,13 @@ Test in the VM:
 
     remote $ cd /vagrant/rails
     remote $ bundle exec rake
-    # Stop! Don't test the whole thing!
+
+    ### Stop! Don't test the whole thing!
 
     remote $ cd /activemodel
     remote $ bundle exec rake
 
-    # Cleanup after yourself...
+    # When you're done, cleanup after yourself...
     remote $ exit
     host $ vagrant halt
 
