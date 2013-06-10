@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+
+  landslide modifications: Adam Zapletal (adamzap@gmail.com)
+                           Nicolas Perriault (nperriault@gmail.com)
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Contributing to Ruby on Rails</title>
+    <!-- Styles -->
+    
+    <link rel="stylesheet" media="print" href="/Library/Python/2.7/site-packages/landslide-1.0.1-py2.7.egg/landslide/themes/default/css/print.css">
+    <link rel="stylesheet" media="screen, projection" href="theme/css/screen.css">
+    
+    
+    <!-- /Styles -->
+    <!-- Javascripts -->
+    
+    <script type="text/javascript" src="/Library/Python/2.7/site-packages/landslide-1.0.1-py2.7.egg/landslide/themes/default/js/slides.js"></script>
+    
+    
+    <!-- /Javascripts -->
+</head>
+<body>
+  <div id="blank"></div>
+  <div class="presentation">
+    <div id="current_presenter_notes">
+      <div id="presenter_note"></div>
+    </div>
+    <div class="slides">
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Contributing to Ruby on Rails</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              1/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>By this guy:</h2></header>
+            
+            
+            <section><p><img src="images/chuck.jpg" alt="Chuck" style="width: 200px;"/></p>
+<h1>Charles Bergeron</h1>
+<p><a href="http://twitter.com/CharlesEllery">@CharlesEllery</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              2/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h2>With Credit to Mark McSpadden</h2></header>
+            
+            
+            <section><p><img src="http://qph.is.quoracdn.net/main-thumb-2619439-200-i9Tm2fEcoS0JAe8HPwC9b0Lspu701viA.jpeg" alt="Mark" style="width: 200px;"/></p>
+<h1>Based on Mark McSpadden's talk: <a href="http://goo.gl/plMEP">'Your First Rails Pull Request'</a></h1>
+<p><a href="http://twitter.com/markmcspadden">@MarkMcspadden</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              3/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Resources</h1></header>
+            
+            
+            <section><h2>Discussing possible features and changes:</h2>
+<p><a href="https://groups.google.com/forum/?fromgroups#!forum/rubyonrails-core">Rails on Google Groups</a></p>
+<p><br></p>
+<h2>Bugs &amp; Patches:</h2>
+<ul>
+<li>Search for existing issues</li>
+<li>Create a new issue</li>
+<li>Fix an existing issue</li>
+</ul>
+<p><a href="https://github.com/rails/rails/issues">Rails Issues on Github</a></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              4/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Where To Start?</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              5/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1><img src="http://tcritic.com/wp-content/uploads/2006/09/rtfm.jpg" style="margin: auto"></h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              6/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Hand-holding!</h1></header>
+            
+            
+            <section><p>Read the <a href="http://edgeguides.rubyonrails.org/contributing_to_ruby_on_rails.html">Rails Edge* Guide</a> on Contributing.</p>
+<p class="footnote">
+  * Specifically the Edge guide because it has what you need for testing...
+</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              7/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Start With The VM</h1></header>
+            
+            
+            <section><p>You'll want the <a href="https://github.com/rails/rails-dev-box">Rails Virtual Machine on Github</a></p>
+<div class="highlight"><pre><span class="lineno">1</span> <span class="nv">$ </span><span class="nb">cd</span> ~/Git
+<span class="lineno">2</span> <span class="nv">$ </span>git clone https://github.com/rails/rails-dev-box.git rails-dev-box
+<span class="lineno">3</span> <span class="nv">$ </span><span class="nb">cd </span>rails-dev-box
+<span class="lineno">4</span> <span class="nv">$ </span>vagrant up
+<span class="lineno">5</span> 
+<span class="lineno">6</span> <span class="c"># Installing... Have a beer with your peer.</span>
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              8/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Your Very Own Rails</h1></header>
+            
+            
+            <section><p><strong><a href="https://github.com/rails/rails">https://github.com/rails/rails</a></strong> =&gt; FORK IT! =&gt; <strong><a href="https://github.com/chuckbergeron/rails">https://github.com/chuckbergeron/rails</a></strong></p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="nv">$ </span>take ~/Git/rails-dev-box
+<span class="lineno"> 2</span> <span class="nv">$ </span>git clone git://github.com/chuckbergeron/rails.git rails
+<span class="lineno"> 3</span> <span class="nv">$ </span><span class="nb">cd </span>rails
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="c"># Add the original rails repo as a remote source...</span>
+<span class="lineno"> 6</span> <span class="nv">$ </span>git remote add upstream git://github.com/rails/rails.git
+<span class="lineno"> 7</span> <span class="nv">$ </span>git fetch upstream
+<span class="lineno"> 8</span> <span class="nv">$ </span>git checkout master
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="c"># ...so you can stay up-to-date:</span>
+<span class="lineno">11</span> <span class="nv">$ </span>git rebase upstream/master
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              9/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Fake It 'Til Ya Make It</h1></header>
+            
+            
+            <section><p>Create a fake application to test Rails against:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> <span class="c"># If you RVM...</span>
+<span class="lineno"> 2</span> <span class="nv">$ </span>rvm use ruby-2.0.0-p0@rails
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="nv">$ </span><span class="nb">cd</span> ~/Git/rails-dev-box/rails
+<span class="lineno"> 5</span> <span class="nv">$ </span>bundle install
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="c"># Use the Rails 4 binary to create your new app (needs --dev flag)</span>
+<span class="lineno"> 8</span> <span class="nv">$ </span>railties/bin/rails new ../test_app --dev
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> gem <span class="s1">&#39;rails&#39;</span>, path: <span class="s1">&#39;/Users/charlesbergeron/Git/rails-dev-box/rails&#39;</span>
+</pre></div>
+
+<p><em>Cue to open Issue &amp; Rails code</em></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              10/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide has_code">
+          <div class="inner">
+            
+            <header><h1>Testing</h1></header>
+            
+            
+            <section><p>Develop locally (on the host, using your vim, sublime, what-have-you)</p>
+<p>Test in the VM:</p>
+<div class="highlight"><pre><span class="lineno"> 1</span> host <span class="nv">$ </span><span class="nb">cd</span> ~/Git/rails-dev-box
+<span class="lineno"> 2</span> host <span class="nv">$ </span>vagrant ssh
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> remote <span class="nv">$ </span><span class="nb">cd</span> /vagrant/rails
+<span class="lineno"> 5</span> remote <span class="nv">$ </span>bundle <span class="nb">exec </span>rake
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="c">### Stop! Don&#39;t test the whole thing!</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> remote <span class="nv">$ </span><span class="nb">cd</span> /activemodel
+<span class="lineno">10</span> remote <span class="nv">$ </span>bundle <span class="nb">exec </span>rake
+<span class="lineno">11</span> 
+<span class="lineno">12</span> <span class="c"># When you&#39;re done, cleanup after yourself...</span>
+<span class="lineno">13</span> remote <span class="nv">$ </span><span class="nb">exit</span>
+<span class="lineno">14</span> host <span class="nv">$ </span>vagrant halt
+</pre></div>
+</section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              11/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>And Then What?</h1></header>
+            
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              12/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Gamification!</h1></header>
+            
+            
+            <section><p><img src="http://www.geekosystem.com/wp-content/uploads/2011/07/gamification-e1311174368310.jpg" width="700"></p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              13/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>Think Of Rails As Simply One Big Game</h1></header>
+            
+            
+            <section><p>Check out the <a href="http://contributors.rubyonrails.org/">Contributor Leaderboard</a> *</p>
+<p class="footnote">
+  * In particular, <a href="http://contributors.rubyonrails.org/contributors/matthew-robertson/commits">Matthew Robertson</a> and <a href="http://contributors.rubyonrails.org/contributors/godfrey-chan/commits">Godfrey Chan</a> – Go forth and beat their scores!
+</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              14/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>I was so inspired that...</h1></header>
+            
+            
+            <section><p><a href="https://github.com/rails/rails/pull/10774">I opened a super exciting, bug-fixing pull request!</a> *</p>
+<p><br><br><br><br></p>
+<p class="footnote">
+  * To use `Range#include?` for non-numeric ranges while sticking to `Range#cover?` for numerical ranges when validating with `validates_inclusion_of`. But that's just the beginning...
+</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              15/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+      <!-- slide source: slides.md -->
+      <div class="slide-wrapper">
+        <div class="slide">
+          <div class="inner">
+            
+            <header><h1>More Gamification?</h1></header>
+            
+            
+            <section><p><img src="http://www.jmorganmarketing.com/wp-content/uploads/2012/03/Gamification11.jpg" width="600"></p>
+<p>wat?</p></section>
+            
+          </div>
+          <div class="presenter_notes">
+            <header><h1>Presenter Notes</h1></header>
+            <section>
+            
+            </section>
+          </div>
+          <footer>
+            
+            <aside class="source">
+              Source: <a href="slides.md">slides.md</a>
+            </aside>
+            
+            <aside class="page_number">
+              16/16
+            </aside>
+          </footer>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+  <div id="toc" class="sidebar hidden">
+    <h2>Table of Contents</h2>
+    <table>
+      <caption>Table of Contents</caption>
+      
+      <tr id="toc-row-1">
+        <th><a href="#slide1">Contributing to Ruby on Rails</a></th>
+        <td><a href="#slide1">1</a></td>
+      </tr>
+      
+        
+        <tr id="toc-row-2" class="sub">
+          <th><a href="#slide2">By this guy:</a></th>
+          <td><a href="#slide2">2</a></td>
+        </tr>
+        
+        <tr id="toc-row-3" class="sub">
+          <th><a href="#slide3">With Credit to Mark McSpadden</a></th>
+          <td><a href="#slide3">3</a></td>
+        </tr>
+        
+      
+      
+      <tr id="toc-row-4">
+        <th><a href="#slide4">Resources</a></th>
+        <td><a href="#slide4">4</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-5">
+        <th><a href="#slide5">Where To Start?</a></th>
+        <td><a href="#slide5">5</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-6">
+        <th><a href="#slide6"><img src="http://tcritic.com/wp-content/uploads/2006/09/rtfm.jpg" style="margin: auto"></a></th>
+        <td><a href="#slide6">6</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-7">
+        <th><a href="#slide7">Hand-holding!</a></th>
+        <td><a href="#slide7">7</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-8">
+        <th><a href="#slide8">Start With The VM</a></th>
+        <td><a href="#slide8">8</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-9">
+        <th><a href="#slide9">Your Very Own Rails</a></th>
+        <td><a href="#slide9">9</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-10">
+        <th><a href="#slide10">Fake It 'Til Ya Make It</a></th>
+        <td><a href="#slide10">10</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-11">
+        <th><a href="#slide11">Testing</a></th>
+        <td><a href="#slide11">11</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-12">
+        <th><a href="#slide12">And Then What?</a></th>
+        <td><a href="#slide12">12</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-13">
+        <th><a href="#slide13">Gamification!</a></th>
+        <td><a href="#slide13">13</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-14">
+        <th><a href="#slide14">Think Of Rails As Simply One Big Game</a></th>
+        <td><a href="#slide14">14</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-15">
+        <th><a href="#slide15">I was so inspired that...</a></th>
+        <td><a href="#slide15">15</a></td>
+      </tr>
+      
+      
+      <tr id="toc-row-16">
+        <th><a href="#slide16">More Gamification?</a></th>
+        <td><a href="#slide16">16</a></td>
+      </tr>
+      
+      
+    </table>
+  </div>
+  
+  <div id="help" class="sidebar hidden">
+    <h2>Help</h2>
+    <table>
+      <caption>Help</caption>
+      <tr>
+        <th>Table of Contents</th>
+        <td>t</td>
+      </tr>
+      <tr>
+        <th>Exposé</th>
+        <td>ESC</td>
+      </tr>
+      <tr>
+        <th>Full screen slides</th>
+        <td>e</td>
+      </tr>
+      <tr>
+        <th>Presenter View</th>
+        <td>p</td>
+      </tr>
+      <tr>
+        <th>Source Files</th>
+        <td>s</td>
+      </tr>
+      <tr>
+        <th>Slide Numbers</th>
+        <td>n</td>
+      </tr>
+      <tr>
+        <th>Toggle screen blanking</th>
+        <td>b</td>
+      </tr>
+      <tr>
+        <th>Show/hide slide context</th>
+        <td>c</td>
+      </tr>
+      <tr>
+        <th>Notes</th>
+        <td>2</td>
+      </tr>
+      <tr>
+        <th>Help</th>
+        <td>h</td>
+      </tr>
+    </table>
+  </div>
+  <script>main()</script>
+</body>
+</html>
